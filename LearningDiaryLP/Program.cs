@@ -9,7 +9,7 @@ namespace LearningDiaryLP
             Topic one = new Topic();
             one.GetTitle();
 
-            Console.WriteLine("Git testaus");
+            //Muutettiin masteria jonkun verran ja nyt testataan git
 
         }
     }
