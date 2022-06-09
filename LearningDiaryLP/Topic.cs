@@ -19,15 +19,17 @@ namespace LearningDiaryLP
             GetEstimatedTime();
             GetSpentTime();
             GetSource();
-            GetLearningDate();
+            GetStartDate();
             IsInProgress();
             GetCompletionDate();
         }
         //compiles answers to string
        public string CompileString()
         {
-            string compiledEntry = Id + Title + Description + EstimatedTimeToMaster + 
-                TimeSpent + Source + StartLearningDate + InProgress + CompletionDate;
+            string compiledEntry = "Entry ID: " + Id + "\n" + Title.ToUpper() +"\n\n" +
+                Description + "\n" + "\nEstimated days to master the topic: " + EstimatedTimeToMaster + "\nDays spent: " +
+                TimeSpent + "\nSource: " + Source + "\nStart date: " +StartLearningDate.ToString("dd:MM:yyyy") + "\nIn progress: "+ 
+                InProgress + "\nCompletion date: "+ CompletionDate.ToString("dd:MM:yyyy");
            return compiledEntry;
         }
 
@@ -42,11 +44,11 @@ namespace LearningDiaryLP
         public bool InProgress { get; set; }
         public DateTime CompletionDate { get; set; }
 
-        //Get running id number NOT WORKING
+        //Get running id number NOT WORKING - user input for now
         public int RunningId()
         {
-            Id = 0;
-            Id++;
+            Console.Write("Enter entry ID: ");
+            Id = Convert.ToInt32(Console.ReadLine());
             return Id;
         }
         //Methods for getting userinput
@@ -54,7 +56,7 @@ namespace LearningDiaryLP
 
         public string GetTitle()
         {
-            Console.WriteLine("Write the title of your topic: ");
+            Console.Write("Write the title of your topic: ");
             Title = Console.ReadLine();
             return Title;
         }
@@ -69,14 +71,14 @@ namespace LearningDiaryLP
 
         public double GetEstimatedTime()
         {
-            Console.WriteLine("How many hours does the topic take?: ");
+            Console.Write("Estimated days to master the topic: ");
             EstimatedTimeToMaster = Convert.ToDouble(Console.ReadLine());
             return EstimatedTimeToMaster;
         }
 
         public double GetSpentTime()
         {
-            Console.WriteLine("How many hours have you spent: ");
+            Console.Write("Days spent on topic: ");
             TimeSpent = Convert.ToDouble(Console.ReadLine());
             return TimeSpent;
 
@@ -84,43 +86,47 @@ namespace LearningDiaryLP
 
         public string GetSource()
         {
-            Console.WriteLine("Give source: ");
+            Console.Write("Give source: ");
             Source = Console.ReadLine();
             return Source;
         }
 
-        public DateTime GetLearningDate()
+        public DateTime GetStartDate()
         {
-            Console.WriteLine("When is the starting date?: ");
+            Console.Write("When is the starting date?: ");
             StartLearningDate = Convert.ToDateTime(Console.ReadLine());
             return StartLearningDate;
 
         }
 
+        //get progress info and completion date from previous entries
         public bool IsInProgress()
         {
-            Console.WriteLine("Is studying of the topic in progress?: ");
-
-            string answer = Console.ReadLine();
-            if (answer.ToLower() == "yes")
-            {
-                InProgress = true;
-            }
-            else if (answer.ToLower() == "no")
+            if (EstimatedTimeToMaster - TimeSpent <= 0)
             {
                 InProgress = false;
+            }
+            else
+            {
+                InProgress = true;
             }
 
             return InProgress;
         }
-
+        
         public DateTime GetCompletionDate()
         {
-            Console.WriteLine("When is the completion date?");
-            CompletionDate = Convert.ToDateTime(Console.ReadLine());
+            if (EstimatedTimeToMaster - TimeSpent <= 0)
+            {
+                CompletionDate = StartLearningDate.AddDays(TimeSpent);
+            }
+            else if (EstimatedTimeToMaster - TimeSpent > 0)
+            {
+                CompletionDate = StartLearningDate.AddDays(EstimatedTimeToMaster);
+            }
+
             return CompletionDate;
 
         }
-        //yhdistä aika-arviot laskureilla ja minimoi user input?
     }
 }

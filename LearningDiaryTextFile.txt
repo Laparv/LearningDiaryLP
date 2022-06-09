@@ -1,1 +1,24 @@
-1KoodausLassen tulee opetella koodaamaan2221awacademy.fi01/01/2022 0.00.00True02/02/2022 0.00.001LisäkoodaustaLassen tulee opetella lisää koodausta1413AW Academy Canvas01/02/2021 0.00.00True01/03/2022 0.00.00
+Entry ID: 1
+KOODAUS
+
+Lassen tulee oppia koodaamaan
+
+Estimated days to master the topic: 90
+Days spent: 4
+Source: AW Academy koulutus
+Start date: 06.06.2022
+In progress: True
+Completion date: 04.09.2022
+------------------------------------------
+Entry ID: 2
+GITHUB
+
+Lassen pitää parantaa gitin käyttöä. Eritoten Githubiin lisäämistä.
+
+Estimated days to master the topic: 3
+Days spent: 2
+Source: www.github.com
+Start date: 07.06.2022
+In progress: True
+Completion date: 10.06.2022
+------------------------------------------
