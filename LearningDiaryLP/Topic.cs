@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace LearningDiaryLP
 {
     class Topic
     {
-        
+
+        //constructor with methods
         public Topic()
         {
             RunningId();
@@ -20,6 +22,13 @@ namespace LearningDiaryLP
             GetLearningDate();
             IsInProgress();
             GetCompletionDate();
+        }
+        //compiles answers to string
+       public string CompileString()
+        {
+            string compiledEntry = Id + Title + Description + EstimatedTimeToMaster + 
+                TimeSpent + Source + StartLearningDate + InProgress + CompletionDate;
+           return compiledEntry;
         }
 
         //Properties and fields
@@ -33,10 +42,10 @@ namespace LearningDiaryLP
         public bool InProgress { get; set; }
         public DateTime CompletionDate { get; set; }
 
-        //Get running id number
+        //Get running id number NOT WORKING
         public int RunningId()
         {
-
+            Id = 0;
             Id++;
             return Id;
         }
