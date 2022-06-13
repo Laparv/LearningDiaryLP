@@ -7,21 +7,12 @@ using System.IO;
 
 namespace LearningDiaryLP
 {
-    class Topic
+    public class Topic
     {
-
-        //constructor with methods
+        //constructor
         public Topic()
         {
-            RunningId();
-            GetTitle();
-            GetDescription();
-            GetEstimatedTime();
-            GetSpentTime();
-            GetSource();
-            GetStartDate();
-            IsInProgress();
-            GetCompletionDate();
+           
         }
         //compiles answers to string
        public string CompileString()
@@ -47,7 +38,7 @@ namespace LearningDiaryLP
         //Get running id number NOT WORKING - user input for now
         public int RunningId()
         {
-            Console.Write("Enter entry ID: ");
+            Console.WriteLine("Give Id");
             Id = Convert.ToInt32(Console.ReadLine());
             return Id;
         }
