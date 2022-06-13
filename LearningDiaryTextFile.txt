@@ -1,0 +1,12 @@
+Entry ID: 1
+LASSE
+
+Lasse
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: lasse
+Start date: 01.01.2022
+In progress: False
+Completion date: 02.01.2022
+------------------------------------------

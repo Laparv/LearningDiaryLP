@@ -11,60 +11,70 @@ namespace LearningDiaryLP
     {
         static void Main(string[] args)
         {
+            bool displayMenu = true;
+            while (displayMenu == true)
+            {
+                displayMenu = MainMenu();
+            }
 
+        }
+        private static bool MainMenu()
+        {
             string path = @"C:\Users\Lasse\source\repos\LearningDiaryLP\LearningDiaryTextFile.txt";
-
-            Console.WriteLine("Learning diary. Leave entry below");
-
-            //constructor for new entry and dictionary
-            Topic entry = new Topic();
             Dictionary<int, Topic> listOfTopics = new Dictionary<int, Topic>();
 
-            entry.RunningId();
-            entry.GetTitle();
-            entry.GetDescription();
-            entry.GetEstimatedTime();
-            entry.GetSpentTime();
-            entry.GetSource();
-            entry.GetStartDate();
-            entry.IsInProgress();
-            entry.GetCompletionDate();
+            Console.Clear();
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1) Add entry");
+            Console.WriteLine("2) Read previous entry");
+            Console.WriteLine("3) Exit");
 
-
-            //Add entry to list 
-            listOfTopics.Add(entry.Id, entry);
-
-            //print string to textfile
-            using (StreamWriter sw = File.AppendText(path))
+            switch (Console.ReadLine())
             {
-                sw.WriteLine(entry.CompileString());
-                sw.WriteLine("------------------------------------------");
+                case "1":
+                    Topic entry = new Topic();
+                    entry.RunningId();
+                    entry.GetTitle();
+                    entry.GetDescription();
+                    entry.GetEstimatedTime();
+                    entry.GetSpentTime();
+                    entry.GetSource();
+                    entry.GetStartDate();
+                    entry.IsInProgress();
+                    entry.GetCompletionDate();
+
+                    using (StreamWriter sw = File.AppendText(path))
+                    {
+                        sw.WriteLine(entry.CompileString());
+                        sw.WriteLine("------------------------------------------");
+                    }
+
+                    Console.WriteLine("\nEntry added to learning diary! \n");
+                    return true;
+
+                case "2":
+                    //read back the entries to user
+                    /*string previousEntries = System.IO.File.ReadAllText(@"C:\Users\Lasse\source\repos\LearningDiaryLP\LearningDiaryTextFile.txt");
+                    Console.WriteLine(previousEntries);*/
+                    Console.WriteLine("Write entry ID to print it out");
+                    int userIdInput = Convert.ToInt32(Console.ReadLine());
+
+                    if (listOfTopics.ContainsKey(userIdInput))
+                    {
+                        Console.WriteLine(listOfTopics[userIdInput].CompileString());
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("No entry with that ID found.");
+                    }
+                    return true;
+
+                case "3":
+                    return false;
+                default:
+                    return true;
             }
-
-            Console.WriteLine("\nEntry added to learning diary! \n");
-
-            /*//read back the entries to user
-            string previousEntries = System.IO.File.ReadAllText(@"C:\Users\Lasse\source\repos\LearningDiaryLP\LearningDiaryTextFile.txt");
-            Console.WriteLine(previousEntries);*/
-
-
-            Console.WriteLine("Write entry ID to print it out");
-
-
-          int userIdInput = Convert.ToInt32(Console.ReadLine());
-
-            if (listOfTopics.ContainsKey(userIdInput))
-            {
-                Console.WriteLine(listOfTopics[userIdInput].CompileString());
-            }
-            else
-            {
-                Console.WriteLine("No entry with that ID found.");
-            }
-
-
-            Console.ReadLine();
-
         }
 
     }
