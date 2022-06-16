@@ -14,6 +14,8 @@ namespace LearningDiaryLP
         {
            
         }
+
+       
         //compiles answers to string
        public string CompileString()
         {
@@ -38,7 +40,7 @@ namespace LearningDiaryLP
         //Get running id number NOT WORKING - user input for now
         public int RunningId()
         {
-            Console.WriteLine("Give Id");
+            Console.WriteLine("Give Id: ");
             Id = Convert.ToInt32(Console.ReadLine());
             return Id;
         }

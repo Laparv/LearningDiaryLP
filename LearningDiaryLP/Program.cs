@@ -11,27 +11,22 @@ namespace LearningDiaryLP
     {
         static void Main(string[] args)
         {
-            bool displayMenu = true;
-            while (displayMenu == true)
-            {
-                displayMenu = MainMenu();
-            }
-
-        }
-        private static bool MainMenu()
-        {
             string path = @"C:\Users\Lasse\source\repos\LearningDiaryLP\LearningDiaryTextFile.txt";
             Dictionary<int, Topic> listOfTopics = new Dictionary<int, Topic>();
 
-            Console.Clear();
-            Console.WriteLine("Choose an option:");
-            Console.WriteLine("1) Add entry");
-            Console.WriteLine("2) Read previous entry");
-            Console.WriteLine("3) Exit");
-
-            switch (Console.ReadLine())
+            do
             {
-                case "1":
+                //menu
+                Console.Clear();
+                Console.WriteLine("Choose an option:");
+                Console.WriteLine("1) Add entry");
+                Console.WriteLine("2) Read previous entry");
+                Console.WriteLine("3) Exit");
+                var menuPick = Console.ReadLine();
+
+                //Add entry to diary
+                if (menuPick == "1")
+                {
                     Topic entry = new Topic();
                     entry.RunningId();
                     entry.GetTitle();
@@ -49,34 +44,36 @@ namespace LearningDiaryLP
                         sw.WriteLine("------------------------------------------");
                     }
 
-                    Console.WriteLine("\nEntry added to learning diary! \n");
-                    return true;
+                    listOfTopics.Add(entry.Id, entry);
 
-                case "2":
-                    //read back the entries to user
-                    /*string previousEntries = System.IO.File.ReadAllText(@"C:\Users\Lasse\source\repos\LearningDiaryLP\LearningDiaryTextFile.txt");
-                    Console.WriteLine(previousEntries);*/
+                    Console.WriteLine("\nEntry added to learning diary! \n");
+                    Console.ReadLine();
+                    continue;
+                }
+                //read previous entry from diary
+                else if (menuPick == "2")
+                {
                     Console.WriteLine("Write entry ID to print it out");
                     int userIdInput = Convert.ToInt32(Console.ReadLine());
+
 
                     if (listOfTopics.ContainsKey(userIdInput))
                     {
                         Console.WriteLine(listOfTopics[userIdInput].CompileString());
                         Console.ReadLine();
                     }
-                    else
-                    {
-                        Console.WriteLine("No entry with that ID found.");
-                    }
-                    return true;
+                    Console.ReadLine();
+                    continue;
+                }
+                //exit app
+                else if (menuPick == "3")
+                {
+                    break;
+                }
 
-                case "3":
-                    return false;
-                default:
-                    return true;
-            }
+            } while (true);
         }
-
     }
-
 }
+      
+
