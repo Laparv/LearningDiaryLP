@@ -1,4 +1,16 @@
-Entry ID: 2
+Entry ID: 1
+LASSE
+
+Testaa
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: awacademy.fi
+Start date: 01.01.2022
+In progress: False
+Completion date: 02.01.2022
+------------------------------------------
+Entry ID: 1
 LASSE
 
 Lasse
@@ -13,12 +25,24 @@ Completion date: 02.01.2022
 Entry ID: 1
 LASSE
 
-Testataan uudestaan
+Lasse
 
-Estimated days to master the topic: 2
+Estimated days to master the topic: 1
+Days spent: 1
+Source: lasse
+Start date: 01.01.2022
+In progress: False
+Completion date: 02.01.2022
+------------------------------------------
+Entry ID: 1
+LASSE
+
+Lasse
+
+Estimated days to master the topic: 1
 Days spent: 1
 Source: awacademy.fi
 Start date: 01.01.2022
-In progress: True
-Completion date: 03.01.2022
+In progress: False
+Completion date: 02.01.2022
 ------------------------------------------
