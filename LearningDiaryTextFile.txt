@@ -46,3 +46,87 @@ Start date: 01.01.2022
 In progress: False
 Completion date: 02.01.2022
 ------------------------------------------
+Entry ID: 1
+LASSE
+
+Lasse
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: lasse
+Start date: 01.01.2022
+In progress: False
+Completion date: 02.01.2022
+------------------------------------------
+Entry ID: 2
+TESTI
+
+Testi
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: testi
+Start date: 01.01.2022
+In progress: False
+Completion date: 02.01.2022
+------------------------------------------
+Entry ID: 1
+LASSE
+
+Vaihdetaan Lasse -> Testi
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: lasse
+Start date: 01.01.2022
+In progress: False
+Completion date: 02.01.2022
+------------------------------------------
+Entry ID: 1
+LASSE
+
+Id 1 --> 2
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: awacademy.fi
+Start date: 01.01.2022
+In progress: False
+Completion date: 02.01.2022
+------------------------------------------
+Entry ID: 1
+LASSE
+
+Lasse--> Testi
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: lasse
+Start date: 01.01.2022
+In progress: False
+Completion date: 02.01.2022
+------------------------------------------
+Entry ID: 2
+LASSE2
+
+Lasse2 --> Testi2
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: lasse
+Start date: 01.01.2022
+In progress: False
+Completion date: 02.01.2022
+------------------------------------------
+Entry ID: 1
+EDITORI
+
+Lasse testaa editoria!
+
+Estimated days to master the topic: 2
+Days spent: 1
+Source: lasse
+Start date: 01.01.2022
+In progress: True
+Completion date: 03.01.2022
+------------------------------------------

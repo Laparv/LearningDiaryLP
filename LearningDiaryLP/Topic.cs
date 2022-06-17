@@ -121,5 +121,49 @@ namespace LearningDiaryLP
             return CompletionDate;
 
         }
+
+        public string EditTitle()
+        {
+            Console.Write("Change title to: ");
+            Title = Console.ReadLine();
+            return Title;
+        }
+        public string EditDescription()
+        {
+            Console.WriteLine("Change description to: ");
+            Description = Console.ReadLine();
+            return Description;
+
+        }
+
+        public double EditEstimatedTime()
+        {
+            Console.Write("Estimated days to master the topic: ");
+            EstimatedTimeToMaster = Convert.ToDouble(Console.ReadLine());
+            return EstimatedTimeToMaster;
+        }
+
+        public double EditSpentTime()
+        {
+            Console.Write("Days spent on topic: ");
+            TimeSpent = Convert.ToDouble(Console.ReadLine());
+            return TimeSpent;
+
+        }
+
+        public string EditSource()
+        {
+            Console.Write("Give source: ");
+            Source = Console.ReadLine();
+            return Source;
+        }
+
+        public DateTime EditStartDate()
+        {
+            Console.Write("When is the starting date?: ");
+            StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+            return StartLearningDate;
+
+        }
     }
 }

@@ -21,7 +21,8 @@ namespace LearningDiaryLP
                 Console.WriteLine("Choose an option:");
                 Console.WriteLine("1) Add entry");
                 Console.WriteLine("2) Read previous entry");
-                Console.WriteLine("3) Exit");
+                Console.WriteLine("3) Edit entry");
+                Console.WriteLine("4) Exit");
                 var menuPick = Console.ReadLine();
 
                 //Add entry to diary
@@ -118,8 +119,74 @@ namespace LearningDiaryLP
                     }
                     
                 }
-                //exit app
+                //edit an entry
                 else if (menuPick == "3")
+                {
+                    Console.WriteLine("Enter an ID of entry to edit: ");
+                    int userIdInput = Convert.ToInt32(Console.ReadLine());
+
+                    var topicToEdit = listOfTopics.Where(h => h.Key == userIdInput);
+
+                    Console.WriteLine("1) Edit title");
+                    Console.WriteLine("2) Edit description");
+                    Console.WriteLine("3) Edit estimated time");
+                    Console.WriteLine("4) Edit time spent");
+                    Console.WriteLine("5) Edit source");
+                    Console.WriteLine("6) Edit starting date");
+
+                    switch (Console.ReadLine())
+                    {
+                        case "1":
+                            foreach (var topic in topicToEdit)
+                            {
+                                topic.Value.EditTitle();
+                            }
+                            continue;
+
+                        case "2":
+                            foreach (var topic in topicToEdit)
+                            {
+                                topic.Value.EditDescription();
+                            }
+                            continue;
+                        case "3":
+                            foreach (var topic in topicToEdit)
+                            {
+                                topic.Value.EditEstimatedTime();
+                                topic.Value.IsInProgress();
+                                topic.Value.GetCompletionDate();
+                            }
+                            continue;
+                        case "4":
+                            foreach (var topic in topicToEdit)
+                            {
+                                topic.Value.EditSpentTime();
+                                topic.Value.IsInProgress();
+                                topic.Value.GetCompletionDate();
+                            }
+                            continue;
+                        case "5":
+                            foreach (var topic in topicToEdit)
+                            {
+                                topic.Value.EditSource();
+                            }
+                            continue;
+                        case "6":
+                            foreach (var topic in topicToEdit)
+                            {
+                                topic.Value.EditStartDate();
+                                topic.Value.IsInProgress();
+                                topic.Value.GetCompletionDate();
+                            }
+                            continue;
+
+                        default:
+                            break;
+                    }
+
+                }
+                //exit app
+                else if (menuPick == "4")
                 {
                     break;
                 }
