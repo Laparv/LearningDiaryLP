@@ -22,7 +22,8 @@ namespace LearningDiaryLP
                 Console.WriteLine("1) Add entry");
                 Console.WriteLine("2) Read previous entry");
                 Console.WriteLine("3) Edit entry");
-                Console.WriteLine("4) Exit");
+                Console.WriteLine("4) Delete entry");
+                Console.WriteLine("5) Exit");
                 var menuPick = Console.ReadLine();
 
                 //Add entry to diary
@@ -185,8 +186,17 @@ namespace LearningDiaryLP
                     }
 
                 }
-                //exit app
+                //entry deletion
                 else if (menuPick == "4")
+                {
+                    Console.WriteLine("Enter an ID of entry to delete: ");
+                    int userIdInput = Convert.ToInt32(Console.ReadLine());
+
+                    var topicToDelete = listOfTopics.Remove(userIdInput);
+                    Console.WriteLine($"Entry {userIdInput} removed.");
+                }
+                //exit app
+                else if (menuPick == "5")
                 {
                     break;
                 }

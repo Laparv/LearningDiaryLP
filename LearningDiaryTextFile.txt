@@ -130,3 +130,15 @@ Start date: 01.01.2022
 In progress: True
 Completion date: 03.01.2022
 ------------------------------------------
+Entry ID: 1
+KOODAUS
+
+Lasse oppii koodaamaan
+
+Estimated days to master the topic: 90
+Days spent: 10
+Source: Awacademy.fi
+Start date: 06.06.2022
+In progress: True
+Completion date: 04.09.2022
+------------------------------------------
