@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-
+using LearningDiaryLP.Models;
+//tämä on Main branch
 namespace LearningDiaryLP
 {
     class Program
