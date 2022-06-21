@@ -12,6 +12,9 @@ namespace LearningDiaryLP
     {
         static void Main(string[] args)
         {
+            using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+            {
+
                 do
                 {
                     //menu
@@ -27,7 +30,7 @@ namespace LearningDiaryLP
                     //Add entry to diary
                     if (menuPick == "1")
                     {
-                        
+
                         Topic entry = new Topic();
                         //entry.RunningId();
                         entry.GetTitle();
@@ -38,9 +41,7 @@ namespace LearningDiaryLP
                         entry.GetStartDate();
                         entry.IsInProgress();
                         entry.GetCompletionDate();
-                        
-                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
-                    {
+
                         var tableOfTopics = connectionToDatabase.Topics.Select(top => top);
                         Models.Topic dbTopic = new Models.Topic()
                         {
@@ -54,9 +55,9 @@ namespace LearningDiaryLP
                             InProgress = entry.InProgress,
                             CompletionDate = entry.CompletionDate
                         };
-                        connectionToDatabase.Topics.Add(dbTopic);
-                        connectionToDatabase.SaveChanges();
-                    }
+                            connectionToDatabase.Topics.Add(dbTopic);
+                            connectionToDatabase.SaveChanges();
+                        
 
                         Console.WriteLine("\nEntry added to learning diary! \n");
                         Console.ReadLine();
@@ -73,8 +74,13 @@ namespace LearningDiaryLP
                                 Console.WriteLine("Write entry ID to print it out");
                                 int userIdInput = Convert.ToInt32(Console.ReadLine());
 
+                                var compiledString = connectionToDatabase.Topics.Where(topic => topic.Id == userIdInput);
 
-                                if (listOfTopics.ContainsKey(userIdInput))
+                                foreach (var item in compiledString)
+                                {
+                                    Console.WriteLine(item.CompileString());
+                                }
+                               /* if (connectionToDatabase.ContainsKey(userIdInput))
                                 {
                                     Console.WriteLine(listOfTopics[userIdInput].CompileString());
                                     Console.ReadLine();
@@ -136,7 +142,8 @@ namespace LearningDiaryLP
                         Console.WriteLine("Enter an ID of entry to edit: ");
                         int userIdInput = Convert.ToInt32(Console.ReadLine());
 
-                        var topicToEdit = listOfTopics.Where(h => h.Key == userIdInput);
+                        var topicToEdit = connectionToDatabase.Topics.Where(h => h.Id == userIdInput);
+
 
                         Console.WriteLine("1) Edit title");
                         Console.WriteLine("2) Edit description");
@@ -150,44 +157,49 @@ namespace LearningDiaryLP
                             case "1":
                                 foreach (var topic in topicToEdit)
                                 {
-                                    topic.Value.EditTitle();
+                                    Console.WriteLine("Change title to: ");
+                                    topic.Title = Console.ReadLine();
+                                    connectionToDatabase.Update(topic.Title);
+                                    connectionToDatabase.SaveChanges();
+                                    
+                                    
                                 }
                                 continue;
 
                             case "2":
                                 foreach (var topic in topicToEdit)
                                 {
-                                    topic.Value.EditDescription();
+                                    //topic.Value.EditDescription();
                                 }
                                 continue;
                             case "3":
                                 foreach (var topic in topicToEdit)
                                 {
-                                    topic.Value.EditEstimatedTime();
-                                    topic.Value.IsInProgress();
-                                    topic.Value.GetCompletionDate();
+                                   // topic.Value.EditEstimatedTime();
+                                   // topic.Value.IsInProgress();
+                                   // topic.Value.GetCompletionDate();
                                 }
                                 continue;
                             case "4":
                                 foreach (var topic in topicToEdit)
                                 {
-                                    topic.Value.EditSpentTime();
-                                    topic.Value.IsInProgress();
-                                    topic.Value.GetCompletionDate();
+                                    //topic.Value.EditSpentTime();
+                                    //topic.Value.IsInProgress();
+                                    //topic.Value.GetCompletionDate();
                                 }
                                 continue;
                             case "5":
                                 foreach (var topic in topicToEdit)
                                 {
-                                    topic.Value.EditSource();
+                                  //  topic.Value.EditSource();
                                 }
                                 continue;
                             case "6":
                                 foreach (var topic in topicToEdit)
                                 {
-                                    topic.Value.EditStartDate();
-                                    topic.Value.IsInProgress();
-                                    topic.Value.GetCompletionDate();
+                                   // topic.Value.EditStartDate();
+                                    //topic.Value.IsInProgress();
+                                   // topic.Value.GetCompletionDate();
                                 }
                                 continue;
 
@@ -202,7 +214,7 @@ namespace LearningDiaryLP
                         Console.WriteLine("Enter an ID of entry to delete: ");
                         int userIdInput = Convert.ToInt32(Console.ReadLine());
 
-                        var topicToDelete = listOfTopics.Remove(userIdInput);
+                        //var topicToDelete = listOfTopics.Remove(userIdInput);
                         Console.WriteLine($"Entry {userIdInput} removed.");
                     }
                     //exit app
@@ -212,9 +224,9 @@ namespace LearningDiaryLP
                     }
                     
                 } while (true);
-            
+
+            }
         }
-    }
-}
+    } }
       
 

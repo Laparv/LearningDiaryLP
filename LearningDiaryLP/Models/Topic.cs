@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 #nullable disable
 
 namespace LearningDiaryLP.Models
@@ -20,5 +21,16 @@ namespace LearningDiaryLP.Models
         public DateTime? StartLearningDate { get; set; }
         public bool? InProgress { get; set; }
         public DateTime? CompletionDate { get; set; }
+
+
+        public string CompileString()
+        {
+            string compiledEntry = "Entry ID: " + Id + "\n" + Title.ToUpper() + "\n\n" +
+                Description + "\n" + "\nEstimated days to master the topic: " + TimeToMaster + "\nDays spent: " +
+                TimeSpent + "\nSource: " + Source + "\nStart date: " + StartLearningDate + "\nIn progress: " +
+                InProgress + "\nCompletion date: " + CompletionDate;
+            return compiledEntry;
+        }
+
     }
 }
