@@ -142,3 +142,219 @@ Start date: 06.06.2022
 In progress: True
 Completion date: 04.09.2022
 ------------------------------------------
+Entry ID: 1
+DATABASE
+
+Testataan database
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+DATABASE
+
+Testataan database
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti Tuisku
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+DATABASE
+
+Opitaan database käyttöä
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti Tuisku
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+DATABASE
+
+Testataan tietokantamenetelmiä
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti Tuisku
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+TIETOKANTA
+
+Testataan tietokantaa
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+TIETOKANTA
+
+Opetellaan tietokantoja
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+TIETOKANNAT
+
+Testataan tietokantoja
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+TIETOKANNAT
+
+Testataan tietokantoja
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+TIETOKANNAT
+
+Opetellaan tietokantoja
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+TIETOKANNAT
+
+Tietokannat testiin
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+TIETOKANNAT
+
+Testataan tietokantoja
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti Tuisku
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+TIETOKANNAT
+
+Testataan tietokantoja
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+TIETOKANNAT
+
+Testataan tietokantoja
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+TIETOKANNAT
+
+Testataan tietokantoja
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 1
+TIETOKANNAT
+
+Testataan tietokantoja
+
+Estimated days to master the topic: 1
+Days spent: 1
+Source: Martti
+Start date: 21.06.2022
+In progress: False
+Completion date: 22.06.2022
+------------------------------------------
+Entry ID: 2
+LISÄÄ TIETOKANTOJA
+
+Lasse
+
+Estimated days to master the topic: 2
+Days spent: 1
+Source: awacademy.fi
+Start date: 21.06.2022
+In progress: True
+Completion date: 23.06.2022
+------------------------------------------
+Entry ID: 5
+TESTIÄ
+
+testataan
+
+Estimated days to master the topic: 90
+Days spent: 15
+Source: aw academy
+Start date: 06.06.2022
+In progress: True
+Completion date: 04.09.2022
+------------------------------------------
+Entry ID: 0
+ID:N POISTO
+
+Poistetaan id ja katsotaan miten käy
+
+Estimated days to master the topic: 6
+Days spent: 1
+Source: Lasse
+Start date: 21.06.2022
+In progress: True
+Completion date: 27.06.2022
+------------------------------------------

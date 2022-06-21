@@ -34,15 +34,13 @@ namespace LearningDiaryLP.Models
 
             modelBuilder.Entity<Topic>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Topic");
+
+                entity.Property(e => e.CompletionDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(255)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Source)
                     .HasMaxLength(255)
