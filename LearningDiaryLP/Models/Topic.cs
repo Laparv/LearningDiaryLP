@@ -31,6 +31,20 @@ namespace LearningDiaryLP.Models
                 InProgress + "\nCompletion date: " + CompletionDate;
             return compiledEntry;
         }
+        
+        public bool IsInProgress()
+        {
+            if (TimeToMaster - TimeSpent <= 0)
+            {
+                InProgress = false;
+            }
+            else
+            {
+                InProgress = true;
+            }
+            return (bool)InProgress;
+        }
 
+        
     }
 }
