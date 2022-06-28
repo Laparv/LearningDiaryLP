@@ -5,13 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using LearningDiaryLP.Models;
+using ClassLibraryLearningDiary;
 //tämä on MAIN branch
 namespace LearningDiaryLP
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
+            
                 do
                 {
                     //menu
@@ -22,6 +25,8 @@ namespace LearningDiaryLP
                     Console.WriteLine("3) Edit entry");
                     Console.WriteLine("4) Delete entry");
                     Console.WriteLine("5) Exit");
+                    //Console.WriteLine("6) Check if date of entry is in the future: ");
+                   // Console.WriteLine("7) Check if date late: ");
                     var menuPick = Console.ReadLine();
 
                     //Add entry to diary
@@ -47,13 +52,21 @@ namespace LearningDiaryLP
                     {
                         DeleteTopic();
                     }
+                   /* else if (menuPick == "6")
+                    {
+                        FutureDate();
+                    }
+                    else if (menuPick == "7")
+                    {
+                        IsItLate();
+                    }*/
                     //exit app
                     else if (menuPick == "5")
-                    {
-                        break;
-                    }
+                            {
+                                break;
+                            }
 
-                } while (true);
+                    } while (true);
             
         }
          public static void AddEntry()
@@ -166,8 +179,8 @@ namespace LearningDiaryLP
                         {
                             Console.WriteLine("The new estimated time is: ");
                             topic.TimeToMaster = Convert.ToInt32(Console.ReadLine());
-                            topic.IsInProgress();
-                            //connectionToDatabase.Update(topic.CompletionDate);
+                            topic.EditIsInProgress();
+                            topic.EditCompletionDate();
                         }
                         connectionToDatabase.SaveChanges();
                         break;
@@ -177,8 +190,7 @@ namespace LearningDiaryLP
                         {
                             Console.WriteLine("Spent time: ");
                             topic.TimeSpent = Convert.ToInt32(Console.ReadLine());
-                            topic.IsInProgress();
-                            //topic.Value.GetCompletionDate();
+                            topic.EditIsInProgress();
                         }
                         connectionToDatabase.SaveChanges();
                         break;
@@ -197,8 +209,8 @@ namespace LearningDiaryLP
                         {
                             Console.WriteLine("Change start date: ");
                             topic.StartLearningDate = Convert.ToDateTime(Console.ReadLine());
-                            topic.IsInProgress();
-                            // topic.Value.GetCompletionDate();
+                            topic.EditIsInProgress();
+                            topic.EditCompletionDate();
                         }
                         connectionToDatabase.SaveChanges();
                         break;
@@ -227,6 +239,51 @@ namespace LearningDiaryLP
                 Console.ReadLine();
             }
         }
+   /*     public static void FutureDate()
+        {
+            MethodLibrary testaus = new MethodLibrary();
+
+            using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+            {
+                Console.WriteLine("Enter an ID of entry to check: ");
+                int userIdInput = Convert.ToInt32(Console.ReadLine());
+
+                var topicToDelete = connectionToDatabase.Topics.Where(topic => topic.Id == userIdInput);
+
+                foreach (var item in topicToDelete)
+                {
+                    Console.WriteLine(testaus.CheckFuture(Convert.ToDateTime(item.CompletionDate)));
+                    if (true)
+                    {
+                        Console.WriteLine("The date is in the future");
+                    }
+                }
+
+                Console.ReadLine();
+            }
+        }
+        public static void IsItLate()
+        {
+            MethodLibrary testaus = new MethodLibrary();
+            using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+            {
+                Console.WriteLine("Enter an ID of entry to check: ");
+                int userIdInput = Convert.ToInt32(Console.ReadLine());
+
+                var topicToDelete = connectionToDatabase.Topics.Where(topic => topic.Id == userIdInput);
+
+                foreach (var item in topicToDelete)
+                {
+                    Console.WriteLine(testaus.CheckIfLate(Convert.ToDateTime(item.StartLearningDate), Convert.ToDouble(item.TimeToMaster)));
+                    if (true)
+                    {
+                        Console.WriteLine("Aikataulussa");
+                    }
+                }
+
+                Console.ReadLine();
+            }
+        }*/
     }
 }
        

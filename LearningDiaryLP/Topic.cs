@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using LearningDiaryLP.Models;
+using ClassLibraryLearningDiary;
 
 namespace LearningDiaryLP
 {
@@ -16,7 +17,6 @@ namespace LearningDiaryLP
            
         }
 
-       
         //compiles answers to string
        public string CompileString()
         {
@@ -87,10 +87,17 @@ namespace LearningDiaryLP
 
         public DateTime GetStartDate()
         {
-            Console.Write("When is the starting date?: ");
-            StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+            try
+            {
+                Console.Write("When is the starting date?: ");
+                StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine("Invalid input please try again");
+                StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+            }
             return StartLearningDate;
-
         }
 
         //get progress info and completion date from previous entries

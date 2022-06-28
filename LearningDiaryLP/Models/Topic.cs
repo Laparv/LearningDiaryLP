@@ -32,7 +32,7 @@ namespace LearningDiaryLP.Models
             return compiledEntry;
         }
         
-        public bool IsInProgress()
+        public bool EditIsInProgress()
         {
             if (TimeToMaster - TimeSpent <= 0)
             {
@@ -45,6 +45,19 @@ namespace LearningDiaryLP.Models
             return (bool)InProgress;
         }
 
-        
+        public DateTime EditCompletionDate()
+        {
+            if (TimeToMaster - TimeSpent <= 0)
+            {
+                CompletionDate = Convert.ToDateTime(StartLearningDate).AddDays(Convert.ToDouble(TimeSpent));
+            }
+            else if (TimeToMaster - TimeSpent > 0)
+            {
+                CompletionDate = Convert.ToDateTime(StartLearningDate).AddDays(Convert.ToDouble(TimeToMaster));
+            }
+
+            return Convert.ToDateTime(CompletionDate);
+
+        }
     }
 }
