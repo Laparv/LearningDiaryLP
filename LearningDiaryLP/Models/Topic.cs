@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ClassLibraryLearningDiary;
 
 
 #nullable disable
@@ -23,16 +24,20 @@ namespace LearningDiaryLP.Models
         public DateTime? CompletionDate { get; set; }
 
 
-        public string CompileString()
+        public string CompileString() //compiles database table column info into string to present to user (utilizes check if late method)
         {
+            MethodLibrary testi = new MethodLibrary(); //calls dll 
+
             string compiledEntry = "Entry ID: " + Id + "\n" + Title.ToUpper() + "\n\n" +
                 Description + "\n" + "\nEstimated days to master the topic: " + TimeToMaster + "\nDays spent: " +
                 TimeSpent + "\nSource: " + Source + "\nStart date: " + StartLearningDate + "\nIn progress: " +
-                InProgress + "\nCompletion date: " + CompletionDate;
+                InProgress + "\nCompletion date: " + CompletionDate + "\nIs on shcedule: " + 
+                (testi.CheckIfLate(Convert.ToDateTime(StartLearningDate), Convert.ToDouble(TimeToMaster)));
+
             return compiledEntry;
         }
         
-        public bool EditIsInProgress()
+        public bool EditIsInProgress() //edits In progress information
         {
             if (TimeToMaster - TimeSpent <= 0)
             {
@@ -45,7 +50,7 @@ namespace LearningDiaryLP.Models
             return (bool)InProgress;
         }
 
-        public DateTime EditCompletionDate()
+        public DateTime EditCompletionDate() //edits completion date to database
         {
             if (TimeToMaster - TimeSpent <= 0)
             {

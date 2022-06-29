@@ -69,7 +69,7 @@ namespace LearningDiaryLP
                     } while (true);
             
         }
-         public static void AddEntry()
+         public static void AddEntry() //adding entry, uses Topic class methods and then adds them to database
          {
              using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
              {
@@ -104,7 +104,7 @@ namespace LearningDiaryLP
                  connectionToDatabase.SaveChanges();
              }
          }
-        public static void ReadEntry()
+        public static void ReadEntry() // reads entry back to user and informs if it is on schedule
         {
             using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
             {
@@ -138,7 +138,7 @@ namespace LearningDiaryLP
             }
         }
  
-        public static void EditTopic()
+        public static void EditTopic() //edit different info of topics and save them to database
         {
             using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
             {
@@ -220,7 +220,7 @@ namespace LearningDiaryLP
                 }
             }
         }
-        public static void DeleteTopic()
+        public static void DeleteTopic() //delete topic based off of id
         {
             using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
             {
@@ -283,7 +283,7 @@ namespace LearningDiaryLP
 
                 Console.ReadLine();
             }
-        }*/
+        }*/ //testing out dll methods
     }
 }
        

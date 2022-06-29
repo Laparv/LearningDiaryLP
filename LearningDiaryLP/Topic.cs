@@ -11,14 +11,12 @@ namespace LearningDiaryLP
 {
     public class Topic
     {
-        //constructor
-        public Topic()
+        public Topic() //constructor
         {
            
         }
 
-        //compiles answers to string
-       public string CompileString()
+       public string CompileString() //NOT IN USE - same method found in Models.Topic
         {
             string compiledEntry = "Entry ID: " + Id + "\n" + Title.ToUpper() +"\n\n" +
                 Description + "\n" + "\nEstimated days to master the topic: " + EstimatedTimeToMaster + "\nDays spent: " +
@@ -38,16 +36,14 @@ namespace LearningDiaryLP
         public bool InProgress { get; set; }
         public DateTime CompletionDate { get; set; }
 
-        //Get running id number NOT WORKING - user input for now
-        public int RunningId()
+        public int RunningId() // NOT IN USE - get id input from user
         {
             Console.WriteLine("Give Id: ");
             Id = Convert.ToInt32(Console.ReadLine());
             return Id;
         }
+        
         //Methods for getting userinput
-
-
         public string GetTitle()
         {
             Console.Write("Write the title of your topic: ");
@@ -129,8 +125,8 @@ namespace LearningDiaryLP
             return CompletionDate;
 
         }
-
-        public string EditTitle()
+      //unused methods for editing entries while console running
+      /*  public string EditTitle()
         {
             Console.Write("Change title to: ");
             Title = Console.ReadLine();
@@ -172,6 +168,6 @@ namespace LearningDiaryLP
             StartLearningDate = Convert.ToDateTime(Console.ReadLine());
             return StartLearningDate;
 
-        }
+        }*/
     }
 }
