@@ -13,16 +13,16 @@ namespace LearningDiaryLP
     {
         public Topic() //constructor
         {
-           
+
         }
 
-       public string CompileString() //NOT IN USE - same method found in Models.Topic
+        public string CompileString() //NOT IN USE - same method found in Models.Topic
         {
-            string compiledEntry = "Entry ID: " + Id + "\n" + Title.ToUpper() +"\n\n" +
+            string compiledEntry = "Entry ID: " + Id + "\n" + Title.ToUpper() + "\n\n" +
                 Description + "\n" + "\nEstimated days to master the topic: " + EstimatedTimeToMaster + "\nDays spent: " +
-                TimeSpent + "\nSource: " + Source + "\nStart date: " +StartLearningDate.ToString("dd:MM:yyyy") + "\nIn progress: "+ 
-                InProgress + "\nCompletion date: "+ CompletionDate.ToString("dd:MM:yyyy");
-           return compiledEntry;
+                TimeSpent + "\nSource: " + Source + "\nStart date: " + StartLearningDate.ToString("dd:MM:yyyy") + "\nIn progress: " +
+                InProgress + "\nCompletion date: " + CompletionDate.ToString("dd:MM:yyyy");
+            return compiledEntry;
         }
 
         //Properties and fields
@@ -42,7 +42,7 @@ namespace LearningDiaryLP
             Id = Convert.ToInt32(Console.ReadLine());
             return Id;
         }
-        
+
         //Methods for getting userinput
         public string GetTitle()
         {
@@ -61,15 +61,41 @@ namespace LearningDiaryLP
 
         public double GetEstimatedTime()
         {
-            Console.Write("Estimated days to master the topic: ");
-            EstimatedTimeToMaster = Convert.ToDouble(Console.ReadLine());
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Estimated days to master the topic: ");
+                    EstimatedTimeToMaster = Convert.ToDouble(Console.ReadLine());
+                    break;
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid input. Please try again!");
+                    continue;
+                }
+            }
             return EstimatedTimeToMaster;
         }
 
         public double GetSpentTime()
         {
-            Console.Write("Days spent on topic: ");
-            TimeSpent = Convert.ToDouble(Console.ReadLine());
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Days spent on topic: ");
+                    TimeSpent = Convert.ToDouble(Console.ReadLine());
+                    break;
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid input. Please try again!");
+                    continue;
+                }
+            }
             return TimeSpent;
 
         }
@@ -83,15 +109,47 @@ namespace LearningDiaryLP
 
         public DateTime GetStartDate()
         {
-            try
+            MethodLibrary check = new MethodLibrary();
+            while (true)
             {
-                Console.Write("When is the starting date?: ");
-                StartLearningDate = Convert.ToDateTime(Console.ReadLine());
-            }
-            catch
-            {
-                Console.WriteLine("Invalid input please try again");
-                StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+                try
+                {
+                    Console.Write("When is the starting date? (dd/mm/yyyy): ");
+                    StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+                    if (check.CheckFuture(StartLearningDate))
+                    {
+                        Console.WriteLine("That date is in the future. Do you still want to set it?\n 1) Yes 2) No");
+                        switch (Console.ReadLine())
+                        {
+                            case "1":
+                                break;
+                            case "2":
+                                Console.WriteLine("Please try again.");
+                                continue;
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input. Please try again");
+                    continue;
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("You didn't enter anything. Please try again ");
+                    continue;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Unknown error. Read log: ");
+                    Console.WriteLine(e.ToString());
+                }
             }
             return StartLearningDate;
         }
@@ -110,7 +168,7 @@ namespace LearningDiaryLP
 
             return InProgress;
         }
-        
+
         public DateTime GetCompletionDate()
         {
             if (EstimatedTimeToMaster - TimeSpent <= 0)
@@ -125,49 +183,49 @@ namespace LearningDiaryLP
             return CompletionDate;
 
         }
-      //unused methods for editing entries while console running
-      /*  public string EditTitle()
-        {
-            Console.Write("Change title to: ");
-            Title = Console.ReadLine();
-            return Title;
-        }
-        public string EditDescription()
-        {
-            Console.WriteLine("Change description to: ");
-            Description = Console.ReadLine();
-            return Description;
+        //unused methods for editing entries while console running
+        /*  public string EditTitle()
+          {
+              Console.Write("Change title to: ");
+              Title = Console.ReadLine();
+              return Title;
+          }
+          public string EditDescription()
+          {
+              Console.WriteLine("Change description to: ");
+              Description = Console.ReadLine();
+              return Description;
 
-        }
+          }
 
-        public double EditEstimatedTime()
-        {
-            Console.Write("Estimated days to master the topic: ");
-            EstimatedTimeToMaster = Convert.ToDouble(Console.ReadLine());
-            return EstimatedTimeToMaster;
-        }
+          public double EditEstimatedTime()
+          {
+              Console.Write("Estimated days to master the topic: ");
+              EstimatedTimeToMaster = Convert.ToDouble(Console.ReadLine());
+              return EstimatedTimeToMaster;
+          }
 
-        public double EditSpentTime()
-        {
-            Console.Write("Days spent on topic: ");
-            TimeSpent = Convert.ToDouble(Console.ReadLine());
-            return TimeSpent;
+          public double EditSpentTime()
+          {
+              Console.Write("Days spent on topic: ");
+              TimeSpent = Convert.ToDouble(Console.ReadLine());
+              return TimeSpent;
 
-        }
+          }
 
-        public string EditSource()
-        {
-            Console.Write("Give source: ");
-            Source = Console.ReadLine();
-            return Source;
-        }
+          public string EditSource()
+          {
+              Console.Write("Give source: ");
+              Source = Console.ReadLine();
+              return Source;
+          }
 
-        public DateTime EditStartDate()
-        {
-            Console.Write("When is the starting date?: ");
-            StartLearningDate = Convert.ToDateTime(Console.ReadLine());
-            return StartLearningDate;
+          public DateTime EditStartDate()
+          {
+              Console.Write("When is the starting date?: ");
+              StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+              return StartLearningDate;
 
-        }*/
+          }*/
     }
 }
