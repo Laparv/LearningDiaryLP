@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.IO;
 using LearningDiaryLP.Models;
 using ClassLibraryLearningDiary;
+using System.Diagnostics;
 //tämä on MAIN branch
 namespace LearningDiaryLP
 {
     class Program
     {
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
 
             do
@@ -25,12 +26,11 @@ namespace LearningDiaryLP
                 Console.WriteLine("3) Edit entry");
                 Console.WriteLine("4) Delete entry");
                 Console.WriteLine("5) Exit");
-                //Console.WriteLine("6) Check if date of entry is in the future: ");
-                // Console.WriteLine("7) Check if date late: ");
-                var menuPick = Console.ReadLine();
+                var menuPick = Console.ReadKey().KeyChar;
 
+                
                 //Add entry to diary
-                if (menuPick == "1")
+                if (menuPick == '1')
                 {
                     AddEntry();
                     Console.WriteLine("\nEntry added to learning diary! \n");
@@ -38,23 +38,24 @@ namespace LearningDiaryLP
                     continue;
                 }
                 //read previous entry from diary. Search with id or title
-                else if (menuPick == "2")
+               
+                else if (menuPick == '2')
                 {
-                    ReadEntry();
+                    await ReadEntry();
                 }
                 //edit an entry
-                else if (menuPick == "3")
+                else if (menuPick == '3')
                 {
-                    EditTopic();
+                   await EditTopic();
                 }
                 //entry deletion
-                else if (menuPick == "4")
+                else if (menuPick == '4')
                 {
-                    DeleteTopic();
+                   await DeleteTopic();
                 }
                 
                 //exit app
-                else if (menuPick == "5")
+                else if (menuPick == '5')
                 {
                     break;
                 }
@@ -65,9 +66,6 @@ namespace LearningDiaryLP
         public static void AddEntry() //adding entry, uses Topic class methods and then adds them to database
         {
             Console.Clear();
-            using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
-            {
-
 
                 Topic entry = new Topic();
                 //entry.RunningId(); not needed, sql does it
@@ -80,7 +78,6 @@ namespace LearningDiaryLP
                 entry.IsInProgress();
                 entry.GetCompletionDate();
 
-                var tableOfTopics = connectionToDatabase.Topics.Select(top => top);
 
                 Models.Topic dbTopic = new Models.Topic()
                 {
@@ -94,57 +91,59 @@ namespace LearningDiaryLP
                     InProgress = entry.InProgress,
                     CompletionDate = entry.CompletionDate
                 };
+            using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+            {
                 connectionToDatabase.Topics.Add(dbTopic);
                 connectionToDatabase.SaveChanges();
             }
         }
-        public static void ReadEntry() // reads entry back to user and informs if it is on schedule
+        public static async Task ReadEntry() // reads entry back to user and informs if it is on schedule
         {
             Console.Clear();
-            using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
-            {
                 Console.WriteLine("1) Search by ID\n2)Search by Title");
-                switch (Console.ReadLine())
+                switch (Console.ReadKey().KeyChar)
                 {
-                    case "1":
-                                Console.Clear();
-                                Console.WriteLine("Write entry ID to print it out");
-                                int userIdInput = Convert.ToInt32(Console.ReadLine());
-                                var idSearchString = connectionToDatabase.Topics.Where(topic => topic.Id == userIdInput);
-
-                                foreach (var item in idSearchString)
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine(item.CompileString());
-                                }
-                                Console.ReadLine();
+                    case '1':
+                        Console.Clear();
+                        Console.WriteLine("Write entry ID to print it out");
+                        int userIdInput = Convert.ToInt32(Console.ReadLine());
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        var idSearchString = connectionToDatabase.Topics.Where(topic => topic.Id == userIdInput);
+                        foreach (var item in idSearchString)
+                        {
+                            Console.Clear();
+                            Console.WriteLine(item.CompileString());
+                        }
+                    }
+                        Console.ReadLine();
                                 break;
 
-                    case "2":
+                    case '2':
                         Console.Clear();
                         Console.WriteLine("Search with title:");
                         string userTitleInput = Console.ReadLine();
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
                         var titleSearchString = connectionToDatabase.Topics.Where(topic => topic.Title.Contains(userTitleInput)).FirstOrDefault();
 
                         Console.Clear();
                         Console.WriteLine(titleSearchString.CompileString());
+                    }
                         Console.ReadLine();
                         break;
 
                     default: break;
                 }
 
-            }
         }
 
-        public static void EditTopic() //edit different info of topics and save them to database
+        public static async Task EditTopic() //edit different info of topics and save them to database
         {
             Console.Clear();
-            using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
-            {
                 Console.WriteLine("Enter an ID of entry to edit: ");
                 int userIdInput = Convert.ToInt32(Console.ReadLine());
-                var topicToEdit = connectionToDatabase.Topics.Where(h => h.Id == userIdInput);
+
                 Console.Clear();
                 Console.WriteLine("1) Edit title");
                 Console.WriteLine("2) Edit description");
@@ -153,30 +152,42 @@ namespace LearningDiaryLP
                 Console.WriteLine("5) Edit source");
                 Console.WriteLine("6) Edit starting date");
 
-                switch (Console.ReadLine())
+                switch (Console.ReadKey().KeyChar)
                 {
-                    case "1":
-                        foreach (var topic in topicToEdit)
+                    case '1':
+                        using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
                         {
-                            Console.Clear();
-                            Console.WriteLine("Change title to: ");
-                            topic.Title = Console.ReadLine();
-
-                        }
+                        var topicToEdit = connectionToDatabase.Topics.Where(h => h.Id == userIdInput);
+                        foreach (var topic in topicToEdit)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Change title to: ");
+                                topic.Title = Console.ReadLine();
+                            }
                         connectionToDatabase.SaveChanges();
-                        break;
 
-                    case "2":
+                    }
+                    break;
+
+                    case '2':
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        var topicToEdit = connectionToDatabase.Topics.Where(h => h.Id == userIdInput);
                         foreach (var topic in topicToEdit)
                         {
+
                             Console.Clear();
                             Console.WriteLine("Change description to: ");
                             topic.Description = Console.ReadLine();
                         }
                         connectionToDatabase.SaveChanges();
+                    }
                         break;
 
-                    case "3":
+                    case '3':
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        var topicToEdit = connectionToDatabase.Topics.Where(h => h.Id == userIdInput);
                         foreach (var topic in topicToEdit)
                         {
                             Console.Clear();
@@ -186,9 +197,13 @@ namespace LearningDiaryLP
                             topic.EditCompletionDate();
                         }
                         connectionToDatabase.SaveChanges();
+                    }
                         break;
 
-                    case "4":
+                    case '4':
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        var topicToEdit = connectionToDatabase.Topics.Where(h => h.Id == userIdInput);
                         foreach (var topic in topicToEdit)
                         {
                             Console.Clear();
@@ -197,9 +212,13 @@ namespace LearningDiaryLP
                             topic.EditIsInProgress();
                         }
                         connectionToDatabase.SaveChanges();
+                    }
                         break;
 
-                    case "5":
+                    case '5':
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        var topicToEdit = connectionToDatabase.Topics.Where(h => h.Id == userIdInput);
                         foreach (var topic in topicToEdit)
                         {
                             Console.Clear();
@@ -207,9 +226,13 @@ namespace LearningDiaryLP
                             topic.Source = Console.ReadLine();
                         }
                         connectionToDatabase.SaveChanges();
+                    }
                         break;
 
-                    case "6":
+                    case '6':
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        var topicToEdit = connectionToDatabase.Topics.Where(h => h.Id == userIdInput);
                         foreach (var topic in topicToEdit)
                         {
                             Console.Clear();
@@ -218,22 +241,22 @@ namespace LearningDiaryLP
                             topic.EditIsInProgress();
                             topic.EditCompletionDate();
                         }
-                        connectionToDatabase.SaveChanges();
+                        await connectionToDatabase.SaveChangesAsync();
+                    }
                         break;
 
                     default:
                         break;
                 }
-            }
         }
-        public static void DeleteTopic() //delete topic based off of id
+        public static  async Task DeleteTopic() //delete topic based off of id
         {
-            using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
-            {
                 Console.Clear();
                 Console.WriteLine("Enter an ID of entry to delete: ");
                 int userIdInput = Convert.ToInt32(Console.ReadLine());
 
+            using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+            {
                 var topicToDelete = connectionToDatabase.Topics.Where(topic => topic.Id == userIdInput);
 
                 foreach (var item in topicToDelete)
@@ -241,13 +264,10 @@ namespace LearningDiaryLP
                     connectionToDatabase.Topics.Remove(item);
                 }
                 connectionToDatabase.SaveChanges();
+            }
 
                 Console.WriteLine($"Entry {userIdInput} removed.");
                 Console.ReadLine();
-            }
         }
     }
 }
-
-
-
