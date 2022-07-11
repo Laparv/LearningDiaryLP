@@ -125,10 +125,32 @@ namespace LearningDiaryLP
                         string userTitleInput = Console.ReadLine();
                     using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
                     {
-                        var titleSearchString = connectionToDatabase.Topics.Where(topic => topic.Title.Contains(userTitleInput)).FirstOrDefault();
+                        var titleSearchString = connectionToDatabase.Topics.Where(topic => topic.Title.Contains(userTitleInput));
 
-                        Console.Clear();
-                        Console.WriteLine(titleSearchString.CompileString());
+                        if (titleSearchString.Count() == 1)
+                        {
+                            Console.WriteLine(titleSearchString.FirstOrDefault().CompileString());
+                        }
+                        else
+                        {
+                            Console.WriteLine("We found the following topics with your search input.");
+                            foreach (var topic in titleSearchString)
+                            {
+                                Console.WriteLine($"ID: {topic.Id}. {topic.Title}");
+                            }
+
+                            Console.WriteLine("Choose which one to print with ID number: ");
+                            int choice = Convert.ToInt32(Console.ReadLine());
+                            foreach (var topic in titleSearchString)
+                            {
+                                if (topic.Id == choice)
+                                {
+                                    Console.WriteLine(topic.CompileString());
+
+                                }
+                            }
+                        }
+                        
                     }
                         Console.ReadLine();
                         break;
