@@ -64,10 +64,10 @@ namespace LearningDiaryLP
             Console.WriteLine("\nEntry added to learning diary! \n");
             Console.ReadLine();
         }
-        public static async Task ReadEntry() // reads entry back to user and informs if it is on schedule
+        public static async Task<bool> ReadEntry() // reads entry back to user and informs if it is on schedule
         {
             Console.Clear();
-            Console.WriteLine("1) Search by ID\n2)Search by Title");
+            Console.WriteLine("1) Search by ID\n2) Search by Title");
             switch (Console.ReadKey().KeyChar)
             {
                 case '1':
@@ -76,15 +76,23 @@ namespace LearningDiaryLP
                     int userIdInput = Convert.ToInt32(Console.ReadLine());
                     using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
                     {
-                        var idSearchString = connectionToDatabase.Topics.Where(topic => topic.Id == userIdInput);
-                        foreach (var item in idSearchString)
+                        
+                        var idSearchString = connectionToDatabase.Topics.Where(topic => topic.Id == userIdInput).FirstOrDefault();
+
+                        while (true)
                         {
+                            if (idSearchString == null)
+                            {
+                                return false;
+                            }
                             Console.Clear();
-                            Console.WriteLine(item.CompileString());
+                            Console.WriteLine(idSearchString.CompileString());
+                            await EditOrDeleteReadTopic(idSearchString);
+                            connectionToDatabase.SaveChanges();
                         }
+                        
                     }
-                    Console.ReadLine();
-                    break;
+
 
                 case '2':
                     Console.Clear();
@@ -120,9 +128,9 @@ namespace LearningDiaryLP
 
                     }
                     Console.ReadLine();
-                    break;
+                    return false;
 
-                default: break;
+                default: return true;
             }
 
         }
@@ -239,6 +247,93 @@ namespace LearningDiaryLP
                     break;
             }
         }
+        public static async Task<bool> EditOrDeleteReadTopic(Models.Topic readTopic) //edit different info of topics and save them to database
+        {
+
+            Console.WriteLine("Edit:\n1) Title 2) Description 3) Estimated time 4) Time spent 5) Source 6) Starting date 7) Delete this entry 8) Exit");
+            
+
+            switch (Console.ReadKey().KeyChar)
+            {
+                /*case '1':
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        ClearConsoleLine();
+                        Console.WriteLine("Change title to: ");
+                        readTopic.Title = Console.ReadLine();
+                        connectionToDatabase.SaveChanges();
+                    }
+                    break;
+
+                case '2':
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                            ClearConsoleLine();
+                            Console.WriteLine("Change description to: ");
+                            readTopic.Description = Console.ReadLine();
+                        connectionToDatabase.SaveChanges();
+                    }
+                    break;
+
+                case '3':
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        ClearConsoleLine();
+                            Console.WriteLine("The new estimated time is: ");
+                            readTopic.TimeToMaster = Convert.ToInt32(Console.ReadLine());
+                        connectionToDatabase.SaveChanges();
+                    }
+                    break;
+
+                case '4':
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        ClearConsoleLine();
+                        Console.WriteLine("Spent time: ");
+                            readTopic.TimeSpent = Convert.ToInt32(Console.ReadLine());
+                        connectionToDatabase.SaveChanges();
+                    }
+                    break;
+
+                case '5':
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        ClearConsoleLine();
+                        Console.WriteLine("Change source: ");
+                            readTopic.Source = Console.ReadLine();
+                        connectionToDatabase.SaveChanges();
+                    }
+                    break;
+
+                case '6':
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        ClearConsoleLine();
+                        Console.WriteLine("Change start date: ");
+                            readTopic.StartLearningDate = Convert.ToDateTime(Console.ReadLine());
+                            readTopic.EditIsInProgress();
+                            readTopic.EditCompletionDate();
+                        connectionToDatabase.SaveChanges();
+                    }
+                    break;
+                case '7':
+
+                    using (LearningDiaryLPContext connectionToDatabase = new LearningDiaryLPContext())
+                    {
+                        connectionToDatabase.Topics.Remove(readTopic);
+                        connectionToDatabase.SaveChanges();
+                    }
+                    ClearConsoleLine();
+                    Console.WriteLine($"Entry {readTopic.Id} removed.");
+                    Console.ReadLine();
+                    break;*/
+                case '8':
+                    return false;
+                default: break;
+
+            }
+            return false;
+        }
         public static async Task DeleteTopic() //delete topic based off of id
         {
             Console.Clear();
@@ -258,6 +353,13 @@ namespace LearningDiaryLP
 
             Console.WriteLine($"Entry {userIdInput} removed.");
             Console.ReadLine();
+        }
+        public static void ClearConsoleLine()
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, currentLineCursor);
         }
     }
 }

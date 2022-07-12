@@ -7,7 +7,7 @@ using System.IO;
 using LearningDiaryLP.Models;
 using ClassLibraryLearningDiary;
 using System.Diagnostics;
-//tämä on MAIN branch
+//tämä on DEV branch
 namespace LearningDiaryLP
 {
     class Program
