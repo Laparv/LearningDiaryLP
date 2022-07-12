@@ -30,8 +30,8 @@ namespace LearningDiaryLP.Models
 
             string compiledEntry = $"Entry ID: {Id} \n{Title.ToUpper()} \n\n{Description}" +
                 $"\n\nEstimated days to master the topic: {TimeToMaster}\nDays spent: {TimeSpent} " +
-                $"\nSource: {Source} \nStart date:{StartLearningDate}\nIn progress: {InProgress}" +
-                $"\nCompletion date: {CompletionDate}" +
+                $"\nSource: {Source} \nStart date: {StartLearningDate.GetValueOrDefault().ToShortDateString()}\nIn progress: {InProgress}" +
+                $"\nCompletion date: {CompletionDate.GetValueOrDefault().ToShortDateString()}" +
                 $"\nIs on shcedule: {check.CheckIfLate(Convert.ToDateTime(StartLearningDate), Convert.ToDouble(TimeToMaster))}";
 
             return compiledEntry;
